@@ -14,6 +14,7 @@ This repository contains the code for a fullstack web application named Brainop.
 *)Features
 - Database: Leverages PostgreSQL as the primary database with Prisma ORM for efficient data interaction.
 - Client-Side Validation: Utilizes libraries like ZOD and React Hook Forms to enforce data integrity and improve user experience.
+- State Management: Used Zustand for managing the global states 
 - Dynamic Rendering: Employs conditional rendering to display content based on user interaction and application state.
 - User Management: Enables retrieving, updating, and resetting user data (e.g., password reset).
 - Type Safety: Enhances code reliability and maintainability through the use of TypeScript.
