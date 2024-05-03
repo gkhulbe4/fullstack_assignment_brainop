@@ -1,7 +1,7 @@
 # Fullstack Assignment: Brainop (Please read this before starting)
 
 *)Project Overview
-This repository contains the code for a fullstack web application named Brainop. The application utilizes a modular architecture with separate client and server folders.
+The application utilizes a modular architecture with separate client and server folders.
 
 *)Installation
 - Navigate to the client folder and execute "npm install" to install project dependencies.
