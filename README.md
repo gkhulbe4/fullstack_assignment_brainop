@@ -1,4 +1,4 @@
-Fullstack Assignment: Brainop (Please read this before starting)
+# Fullstack Assignment: Brainop (Please read this before starting)
 
 *)Project Overview
 This repository contains the code for a fullstack web application named Brainop. The application utilizes a modular architecture with separate client and server folders.
@@ -20,6 +20,7 @@ This repository contains the code for a fullstack web application named Brainop.
 - User Experience: Custom toast notifications provide visual feedback to users for a more engaging experience.
 - Authentication: Implements JSON Web Tokens (JWT) for secure user authentication.
 - Middleware: Server-side middleware is incorporated for added functionality.
+- Password Visibility: Added show/hide button to toggle the visibility of the password.
 - Responsive Design: Ensures optimal user experience across various screen sizes.
 
 *)Disclaimer
