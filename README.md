@@ -1,7 +1,7 @@
 # Fullstack Assignment: Brainop (Please read this before starting)
 
 *)Project Overview
-The application utilizes a modular architecture with separate client and server folders.
+- The application utilizes a modular architecture with separate client and server folders.
 
 *)Installation
 - Navigate to the client folder and execute "npm install" to install project dependencies.
@@ -25,4 +25,4 @@ The application utilizes a modular architecture with separate client and server 
 - Responsive Design: Ensures optimal user experience across various screen sizes.
 
 *)Disclaimer
-While design is not my core strength , but I surely possesses the ability to replicate provided designs.
+- While design is not my core strength , but I surely possesses the ability to replicate provided designs.
