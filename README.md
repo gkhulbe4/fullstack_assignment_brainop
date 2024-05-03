@@ -14,8 +14,9 @@
 *)Features
 - Database: Leverages PostgreSQL as the primary database with Prisma ORM for efficient data interaction.
 - Client-Side Validation: Utilizes libraries like ZOD and React Hook Forms to enforce data integrity and improve user experience.
+- React Query: Used React Query to implement infinite scrolling of posts and for fetching the user data.
 - State Management: Used Zustand for managing the global states 
-- Dynamic Rendering: Employs conditional rendering to display content based on user interaction and application state.
+- Dynamic Rendering: Employs conditional rendering to display content based on user interaction , application state and user authentication.
 - User Management: Enables retrieving, updating, and resetting user data (e.g., password reset).
 - Type Safety: Enhances code reliability and maintainability through the use of TypeScript.
 - User Experience: Custom toast notifications provide visual feedback to users for a more engaging experience.
