@@ -10,7 +10,6 @@ function Dashboard() {
     queryKey: ["user"],
     queryFn: async () => {
       const res = await axios.get(`http://localhost:3000/user/${userId}`);
-      console.log(res.data.user);
       return res.data.user;
     },
   });

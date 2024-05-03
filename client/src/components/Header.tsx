@@ -27,18 +27,18 @@ function Header() {
   }, []);
 
   return (
-    <div className="flex justify-between items-center px-6 py-4 shadow-md bg-black">
+    <div className="flex flex-col md:flex-row justify-between items-center px-6 py-4 shadow-md bg-black">
       <h1
-        className="text-3xl font-bold cursor-pointer bg-gradient-to-r from-pink-200 to-blue-800 text-transparent bg-clip-text font-serif"
+        className="text-3xl font-bold cursor-pointer bg-gradient-to-r from-pink-200 to-blue-800 text-transparent bg-clip-text font-serif mb-4 md:mb-0 md:mr-4"
         onClick={() => navigate("/")}
       >
         BrainOp
       </h1>
-      <div className="flex justify-between items-center gap-6">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
         {auth ? (
           <>
             <button
-              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800  hover:scale-110 transition-all duration-300 ease-in-out"
+              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800 hover:scale-110 transition-all duration-300 ease-in-out"
               onClick={() => {
                 navigate(`/posts`);
               }}
@@ -46,7 +46,7 @@ function Header() {
               Posts
             </button>
             <button
-              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800  hover:scale-110 transition-all duration-300 ease-in-out"
+              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800 hover:scale-110 transition-all duration-300 ease-in-out"
               onClick={() => {
                 localStorage.setItem("token", "");
                 localStorage.setItem("id", "");
@@ -56,7 +56,7 @@ function Header() {
               Logout
             </button>
             <button
-              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800  hover:scale-110 transition-all duration-300 ease-in-out"
+              className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800 hover:scale-110 transition-all duration-300 ease-in-out"
               onClick={() => {
                 navigate(`/dashboard/${userId}`);
               }}
@@ -66,7 +66,7 @@ function Header() {
           </>
         ) : (
           <button
-            className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800  hover:scale-110 transition-all duration-300 ease-in-out"
+            className="bg-black text-white px-4 py-2 rounded-xl border border-white hover:bg-gray-800 hover:scale-110 transition-all duration-300 ease-in-out"
             onClick={() => navigate("/signin")}
           >
             Signin

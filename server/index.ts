@@ -101,9 +101,16 @@ app.post("/signin", async (req, res) => {
 });
 
 app.get("/getposts", async (req, res) => {
+  const limit = 5
+    const cursor = req.query.cursor ?? ''
+    const cursorObj = cursor === '' ? undefined : { id: cursor as string }
   try {
-    const posts = await db.post.findMany();
-    return res.status(200).json({ posts });
+    const posts = await db.post.findMany({
+      skip: cursor !== '' ? 1 : 0,
+      cursor: cursorObj,
+      take: limit,
+    });
+    return res.status(200).json({ posts, nextId: posts.length === limit ? posts[limit - 1].id : undefined })
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal Server Error" });

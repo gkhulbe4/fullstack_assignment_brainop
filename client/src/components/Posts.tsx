@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from 'react'
 import usePostStore from "@/utils/postStore";
 import axios from "axios";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from 'react-intersection-observer'
 
 type Post = {
   id: string;
@@ -10,34 +11,34 @@ type Post = {
 };
 
 function Posts() {
-  const queryClient = useQueryClient();
+  const { ref, inView } = useInView()
   const { auth } = usePostStore((state) => ({
     auth: state.auth,
   }));
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["posts"],
-    queryFn: async () => {
-      const res = await axios.get("http://localhost:3000/getposts");
-      return res.data.posts;
-    },
-  });
+  const fetchPosts = async ({ pageParam = "" }) => {
+    const res = await axios.get(`http://localhost:3000/getposts?cursor=${pageParam}`)
+    return res.data
+  }
 
-  // async function getPosts() {
-  //   try {
-  //     const res = await axios.get("http://localhost:3000/getposts");
-  //     console.log(res.data.posts);
-  //     setPosts(res.data.posts);
-  //     setLoading(false);
-  //   } catch (error) {
-  //     console.error("Error fetching posts:", error);
-  //     setLoading(false);
-  //   }
-  // }
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    getNextPageParam: (lastPage) => lastPage.nextId ?? false,
+    initialPageParam: "",
+  })
 
-  // useEffect(() => {
-  //   getPosts();
-  // }, []);
+  useEffect(() => {
+    if (inView && hasNextPage) {
+      fetchNextPage()
+    }
+  }, [inView])
 
   if (!auth) {
     return <div className="h-screen">Please login to see the posts</div>;
@@ -48,22 +49,25 @@ function Posts() {
   }
 
   return (
-    <div className="bg-gray-700 flex items-center justify-center" style={{backgroundImage: "url('https://pbs.twimg.com/ext_tw_video_thumb/1496101358122016768/pu/img/CUt0j0MQ_B_joMeQ?format=jpg&name=large')"}}>
-      {isLoading ? (
-        <h1>Please wait , Posts are loading</h1>
-      ) : (
-        <div className="flex flex-col gap-3 items-center justify-start w-[60%] bg-[#000033] rounded-3xl" >
-          {data.map((post: Post) => (
-            <div className="card w-96 bg-purple-200 text-primary-content" key={post.id}>
-            <div className="card-body">
-              <h2 className="card-title">{post.title}</h2>
-              <p>{post.description}</p>
-            </div>
+    <div className="bg-gray-700 flex flex-col items-center justify-center pt-6 gap-3" style={{backgroundImage: "url('https://pbs.twimg.com/ext_tw_video_thumb/1496101358122016768/pu/img/CUt0j0MQ_B_joMeQ?format=jpg&name=large')"}}>
+    {data &&
+      data.pages.map((page) => {
+        return (
+          <div className="flex flex-col gap-3 items-center justify-start w-[60%] rounded-3xl" key={page.nextId ?? 'lastPage'}>
+            {page.posts.map((post: Post) => (
+              <div className="border border-gray-700 bg-white backdrop-filter backdrop-blur-lg bg-opacity-10 text-white py-2 px-4 rounded-2xl" key={post.id}>
+                <h1 className='text-2xl font-semibold'>{post.title}</h1>
+                <p className="font-extralight">{post.description}</p>
+              </div>
+            ))}
           </div>
-          ))}
-        </div>
-      )}
-    </div>
+        )
+      })}
+      <span style={{ visibility: 'hidden' }} ref={ref}>
+      intersection observer marker
+    </span>
+    {isFetchingNextPage ? <div className="font-extrabold text-4xl text-white">Loading...</div> : null}
+  </div>
   );
 }
 
