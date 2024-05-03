@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../../@/components/ui/button";
@@ -14,11 +14,23 @@ import { signupSchema } from "../../schema/index";
 import { z } from "zod";
 import axios from "axios";
 import { Toaster, toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import usePostStore from "@/utils/postStore";
 
 type signup = z.infer<typeof signupSchema>;
 function Signup() {
   const [checkbox, setCheckbox] = useState<boolean>(false);
   const [view, setView] = useState<boolean>(false);
+  const { auth } = usePostStore((state) => ({
+    auth: state.auth,
+  }));
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth === true) {
+      navigate("/posts");
+    }
+  }, [auth, navigate]);
 
   const form = useForm<signup>({
     resolver: zodResolver(signupSchema),
