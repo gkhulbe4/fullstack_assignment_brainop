@@ -1,12 +1,14 @@
 # Fullstack Assignment: Brainop (Please read this before starting)
 
+NOTE: Actually, you cannot test the website since the database is local. However, I am inserting a demo video link so that you can observe all the functionalities.
+Video link: https://www.loom.com/share/48af78fc92c94219b21fc2de94a69af9?sid=067ec68f-b84d-43ce-990f-80933b18487e 
+
 *)Project Overview
 - The application utilizes a modular architecture with separate client and server folders.
 
 *)Installation
 - Navigate to the client folder and execute "npm install" to install project dependencies.
 - Repeat step 1 in the server folder.
-- I have inserted the ".env" file so that you can test the website
   
 *)Running the Application
 - Start the development server in both folders by running "npm run dev".
